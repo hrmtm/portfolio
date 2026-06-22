@@ -91,8 +91,15 @@
       user-select: none;
     }
 
-    .badge {
+    .badge-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
       margin-bottom: 1.75rem;
+    }
+
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -176,6 +183,13 @@
       text-transform: uppercase;
     }
 
+    .sub-badge {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.2);
+      text-transform: uppercase;
+    }
+
     .cta {
       display: flex;
       align-items: center;
@@ -250,9 +264,12 @@
     </svg>
 
     <div class="hero">
-      <div class="badge">
-        <span class="badge-dot"></span>
-        <span class="badge-text">available · germany</span>
+      <div class="badge-group">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">available · germany</span>
+        </div>
+        <span class="sub-badge">fokus: next.js</span>
       </div>
 
       <div class="gooey-wrap">
