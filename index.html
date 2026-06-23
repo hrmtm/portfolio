@@ -528,6 +528,27 @@
     }
     .card-slot.on { background: rgba(255,255,255,0.3); }
 
+    /* Card preview image */
+    .card-preview {
+      width: calc(100% + 4.5rem);
+      margin: -2.25rem -2.25rem 0;
+      display: block;
+      border-bottom: 1px solid var(--border);
+      border-radius: 0;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .card-preview img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+      max-height: 180px;
+      opacity: 0.7;
+      transition: opacity 0.35s;
+    }
+    .project-card:hover .card-preview img { opacity: 0.9; }
+
     /* Coming soon */
     .project-card.coming-soon {
       cursor: default;
@@ -784,6 +805,9 @@
 
       <a href="https://drop.hrmtm.de" target="_blank" rel="noopener noreferrer"
          class="project-card" aria-label="drop — öffentlicher File-Drop öffnen">
+        <div class="card-preview" aria-hidden="true">
+          <img src="https://raw.githubusercontent.com/hrmtm/drop/main/public/preview.png" alt="" loading="lazy" />
+        </div>
         <div class="card-visual-slots" aria-hidden="true">
           <span class="card-slot on"></span>
           <span class="card-slot on"></span>
