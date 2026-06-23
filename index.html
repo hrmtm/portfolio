@@ -137,6 +137,19 @@
     }
     .nav-link:hover { color: var(--text-2); }
 
+    /* ── Hero Backlight ────────────────────────────── */
+    .hero-backlight {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 45% 40% at 15% 25%, rgba(255,255,255,0.13)  0%, transparent 70%),
+        radial-gradient(ellipse 40% 35% at 85% 55%, rgba(255,255,255,0.11)  0%, transparent 68%),
+        radial-gradient(ellipse 35% 30% at 50% 88%, rgba(255,255,255,0.09)  0%, transparent 65%),
+        radial-gradient(ellipse 30% 28% at 70% 15%, rgba(255,255,255,0.08)  0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
     /* ── Hero ──────────────────────────────────────── */
     .hero {
       position: relative;
@@ -603,6 +616,7 @@
 
   <!-- Hero -->
   <section class="hero" aria-label="Intro">
+    <div class="hero-backlight" aria-hidden="true"></div>
 
     <div class="badge-row">
       <span class="badge">
@@ -744,7 +758,17 @@
 
     // Gooey text morphing
     (function () {
-      const texts       = ['harimtim', 'hrmtm', 'hxrmtm'];
+      const texts = [
+        "hrmtm",
+        "Web-Entwickler",
+        "Next.js",
+        "Python",
+        "UI/UX Design",
+        "Open Source",
+        "Full Stack",
+        "Deine Idee"
+      ];
+ 
       const morphTime   = 1;
       const cooldownTime = 1.8;
       const t1 = document.getElementById('text1');
