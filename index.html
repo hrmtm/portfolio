@@ -493,6 +493,76 @@
       transform: translate(3px, -3px);
     }
 
+    /* Card decorative visuals */
+    .card-visual {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .project-card:hover .card-visual { opacity: 1; }
+
+    .card-visual-grid {
+      top: 0; right: 0;
+      width: 160px;
+      height: 110px;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 18px 18px;
+      mask-image: linear-gradient(to bottom-left, black 10%, transparent 65%);
+    }
+
+    .card-visual-slots {
+      bottom: 2.25rem; right: 2.25rem;
+      display: flex;
+      gap: 5px;
+    }
+    .card-slot {
+      width: 9px; height: 9px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 2px;
+    }
+    .card-slot.on { background: rgba(255,255,255,0.3); }
+
+    /* Coming soon */
+    .project-card.coming-soon {
+      cursor: default;
+      background: var(--bg);
+    }
+    .project-card.coming-soon::before { display: none; }
+    .project-card.coming-soon:hover { background: var(--bg); }
+    .project-card.coming-soon .project-name { color: var(--text-2); }
+
+    .soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 3px;
+      padding: 0.22rem 0.6rem;
+      width: fit-content;
+    }
+
+    .soon-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--text-3);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .card-visual-wave {
+      top: 0; right: 0;
+      width: 120px; height: 100px;
+      overflow: hidden;
+      mask-image: linear-gradient(to bottom-left, black 10%, transparent 65%);
+    }
+    .card-visual-wave svg { opacity: 0.07; }
+
     /* ── Footer ────────────────────────────────────── */
     .footer {
       position: relative;
@@ -690,10 +760,11 @@
     <div class="projects-grid">
 
       <a href="https://github.com/hrmtm/portfolio" target="_blank" rel="noopener noreferrer"
-         class="project-card wide" aria-label="Portfolio-Seite">
+         class="project-card wide" aria-label="Portfolio-Seite auf GitHub">
+        <div class="card-visual card-visual-grid" aria-hidden="true"></div>
         <span class="project-number">001</span>
         <h3 class="project-name">Portfolio — diese Seite</h3>
-        <p class="project-desc">Persönliche Portfolio-Seite mit Gooey-Textmorphing, Meteor-Animationen und einem cinematic Dark-Space-Look. Reines HTML, CSS und Vanilla JS — kein Framework, kein Build-Step.</p>
+        <p class="project-desc">Cinematic Dark-Space-Look mit Gooey-Textmorphing, Meteor-Regen und Mouse-Tracking-Glow auf den Karten. Kein Framework, kein Build-Step — reines HTML, CSS und Vanilla JS.</p>
         <div class="project-tags">
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
@@ -703,10 +774,17 @@
       </a>
 
       <a href="https://drop.hrmtm.de" target="_blank" rel="noopener noreferrer"
-         class="project-card" aria-label="drop — öffentlicher File-Drop">
+         class="project-card" aria-label="drop — öffentlicher File-Drop öffnen">
+        <div class="card-visual card-visual-slots" aria-hidden="true">
+          <span class="card-slot on"></span>
+          <span class="card-slot on"></span>
+          <span class="card-slot"></span>
+          <span class="card-slot"></span>
+          <span class="card-slot"></span>
+        </div>
         <span class="project-number">002</span>
         <h3 class="project-name">drop.</h3>
-        <p class="project-desc">Öffentlicher File-Drop via Vercel Blob. Max. 5 Dateien, 25 MB pro Datei — kein Login, kein Tracking. Einfach ablegen und den Link teilen.</p>
+        <p class="project-desc">Schnelles, öffentliches File-Sharing über Vercel Blob. Bis zu 5 Dateien à 25 MB, kein Login, kein Tracking — ablegen, Link teilen, fertig.</p>
         <div class="project-tags">
           <span class="tag">Next.js</span>
           <span class="tag">TypeScript</span>
@@ -715,16 +793,24 @@
         <span class="project-arrow" aria-hidden="true">↗</span>
       </a>
 
-      <a href="#" class="project-card" aria-label="Projekt 3 — Platzhalter">
-        <span class="project-number">003</span>
-        <h3 class="project-name">Dein Projekt</h3>
-        <p class="project-desc">Trag hier deinen Projektnamen und eine kurze Beschreibung ein.</p>
-        <div class="project-tags">
-          <span class="tag">React</span>
-          <span class="tag">Tailwind</span>
+      <div class="project-card coming-soon" aria-label="Projekt 3 — demnächst">
+        <div class="card-visual card-visual-wave" aria-hidden="true">
+          <svg viewBox="0 0 120 100" width="120" height="100" fill="none">
+            <path d="M-10 50 Q20 20 50 50 Q80 80 110 50 Q140 20 170 50" stroke="white" stroke-width="1.5"/>
+            <path d="M-10 65 Q20 35 50 65 Q80 95 110 65 Q140 35 170 65" stroke="white" stroke-width="1.5"/>
+            <path d="M-10 35 Q20 5 50 35 Q80 65 110 35 Q140 5 170 35" stroke="white" stroke-width="1.5"/>
+          </svg>
         </div>
-        <span class="project-arrow" aria-hidden="true">↗</span>
-      </a>
+        <span class="project-number">003</span>
+        <h3 class="project-name">Nächstes Projekt</h3>
+        <p class="project-desc">Etwas Neues entsteht gerade. Ideen gibt es genug.</p>
+        <div class="project-tags">
+          <span class="soon-badge">
+            <span class="soon-dot" aria-hidden="true"></span>
+            Coming soon
+          </span>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -840,7 +926,7 @@
 
     // Mouse-tracking glow on project cards
     (function () {
-      document.querySelectorAll('.project-card').forEach(card => {
+      document.querySelectorAll('.project-card:not(.coming-soon)').forEach(card => {
         card.addEventListener('mousemove', e => {
           const r = card.getBoundingClientRect();
           card.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100) + '%');
