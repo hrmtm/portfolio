@@ -493,30 +493,33 @@
       transform: translate(3px, -3px);
     }
 
-    /* Card decorative visuals */
-    .card-visual {
-      position: absolute;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s;
+    /* Project icon */
+    .project-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text-2);
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      flex-shrink: 0;
     }
-    .project-card:hover .card-visual { opacity: 1; }
-
-    .card-visual-grid {
-      top: 0; right: 0;
-      width: 160px;
-      height: 110px;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
-      background-size: 18px 18px;
-      mask-image: linear-gradient(to bottom-left, black 10%, transparent 65%);
+    .project-card:hover .project-icon {
+      border-color: var(--border-hi);
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
     }
 
+    /* Card slot dots (drop) */
     .card-visual-slots {
+      position: absolute;
       bottom: 2.25rem; right: 2.25rem;
       display: flex;
       gap: 5px;
+      pointer-events: none;
     }
     .card-slot {
       width: 9px; height: 9px;
@@ -531,8 +534,16 @@
       background: var(--bg);
     }
     .project-card.coming-soon::before { display: none; }
-    .project-card.coming-soon:hover { background: var(--bg); }
-    .project-card.coming-soon .project-name { color: var(--text-2); }
+    .project-card.coming-soon:hover  { background: var(--bg); }
+
+    .project-card.coming-soon .project-icon {
+      border-style: dashed;
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-3);
+      background: transparent;
+    }
+    .project-card.coming-soon .project-name { color: var(--text-3); }
+    .project-card.coming-soon .project-desc { color: rgba(240,240,255,0.28); }
 
     .soon-badge {
       display: inline-flex;
@@ -554,14 +565,6 @@
       background: var(--text-3);
       animation: pulse 2.4s ease-in-out infinite;
     }
-
-    .card-visual-wave {
-      top: 0; right: 0;
-      width: 120px; height: 100px;
-      overflow: hidden;
-      mask-image: linear-gradient(to bottom-left, black 10%, transparent 65%);
-    }
-    .card-visual-wave svg { opacity: 0.07; }
 
     /* ── Footer ────────────────────────────────────── */
     .footer {
@@ -761,10 +764,16 @@
 
       <a href="https://github.com/hrmtm/portfolio" target="_blank" rel="noopener noreferrer"
          class="project-card wide" aria-label="Portfolio-Seite auf GitHub">
-        <div class="card-visual card-visual-grid" aria-hidden="true"></div>
         <span class="project-number">001</span>
-        <h3 class="project-name">Portfolio — diese Seite</h3>
-        <p class="project-desc">Cinematic Dark-Space-Look mit Gooey-Textmorphing, Meteor-Regen und Mouse-Tracking-Glow auf den Karten. Kein Framework, kein Build-Step — reines HTML, CSS und Vanilla JS.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div class="project-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3 class="project-name">Portfolio — diese Seite</h3>
+        </div>
+        <p class="project-desc">Cinematic Dark-Space-Look mit Gooey-Textmorphing, Meteor-Regen und Mouse-Tracking-Glow. Kein Framework, kein Build-Step — reines HTML, CSS und Vanilla JS.</p>
         <div class="project-tags">
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
@@ -775,7 +784,7 @@
 
       <a href="https://drop.hrmtm.de" target="_blank" rel="noopener noreferrer"
          class="project-card" aria-label="drop — öffentlicher File-Drop öffnen">
-        <div class="card-visual card-visual-slots" aria-hidden="true">
+        <div class="card-visual-slots" aria-hidden="true">
           <span class="card-slot on"></span>
           <span class="card-slot on"></span>
           <span class="card-slot"></span>
@@ -783,8 +792,15 @@
           <span class="card-slot"></span>
         </div>
         <span class="project-number">002</span>
-        <h3 class="project-name">drop.</h3>
-        <p class="project-desc">Schnelles, öffentliches File-Sharing über Vercel Blob. Bis zu 5 Dateien à 25 MB, kein Login, kein Tracking — ablegen, Link teilen, fertig.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div class="project-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 19V5M5 12l7-7 7 7"/><path d="M3 19h18"/>
+            </svg>
+          </div>
+          <h3 class="project-name">drop.</h3>
+        </div>
+        <p class="project-desc">Öffentliches File-Sharing via Vercel Blob. Bis zu 5 Dateien à 25 MB, kein Login, kein Tracking.</p>
         <div class="project-tags">
           <span class="tag">Next.js</span>
           <span class="tag">TypeScript</span>
@@ -794,16 +810,16 @@
       </a>
 
       <div class="project-card coming-soon" aria-label="Projekt 3 — demnächst">
-        <div class="card-visual card-visual-wave" aria-hidden="true">
-          <svg viewBox="0 0 120 100" width="120" height="100" fill="none">
-            <path d="M-10 50 Q20 20 50 50 Q80 80 110 50 Q140 20 170 50" stroke="white" stroke-width="1.5"/>
-            <path d="M-10 65 Q20 35 50 65 Q80 95 110 65 Q140 35 170 65" stroke="white" stroke-width="1.5"/>
-            <path d="M-10 35 Q20 5 50 35 Q80 65 110 35 Q140 5 170 35" stroke="white" stroke-width="1.5"/>
-          </svg>
-        </div>
         <span class="project-number">003</span>
-        <h3 class="project-name">Nächstes Projekt</h3>
-        <p class="project-desc">Etwas Neues entsteht gerade. Ideen gibt es genug.</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div class="project-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3 class="project-name">Nächstes Projekt</h3>
+        </div>
+        <p class="project-desc">Etwas Neues entsteht gerade.</p>
         <div class="project-tags">
           <span class="soon-badge">
             <span class="soon-dot" aria-hidden="true"></span>
